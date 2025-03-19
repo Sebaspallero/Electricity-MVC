@@ -73,8 +73,9 @@ public class UserService implements UserDetailsService{
 
             ServletRequestAttributes attr = (ServletRequestAttributes) RequestContextHolder.currentRequestAttributes();
             HttpSession session = attr.getRequest().getSession(true);
-            session.setAttribute("usersession", user);
-            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), permits);
+            session.setAttribute("usersession", user); 
+
+            return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(),  permits);
             
         } else {
             return null;

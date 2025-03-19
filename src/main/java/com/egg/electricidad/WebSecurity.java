@@ -20,31 +20,28 @@ public class WebSecurity {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/css/**", "/js/**", "/img/**", "/**").permitAll()
-            )
+                .authorizeHttpRequests((authorize) -> authorize
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
+                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers("/inicio").hasAnyRole("USER", "ADMIN"))
 
-            .formLogin((form) -> form
-                .loginPage("/login")
-                .loginProcessingUrl("/logincheck")
-                .usernameParameter("email")
-                .passwordParameter("password")
-                .defaultSuccessUrl("/inicio", true)
-                .permitAll()
-            )
+                .formLogin((form) -> form
+                        .loginPage("/auth/login")
+                        .loginProcessingUrl("/logincheck")
+                        .usernameParameter("email")
+                        .passwordParameter("password")
+                        .defaultSuccessUrl("/inicio", true)
+                        .permitAll())
+                .logout((logout) -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login")
+                        .invalidateHttpSession(true)
+                        .permitAll())
 
-            .logout((logout) -> logout
-                .logoutUrl("/logout")
-                .logoutSuccessUrl("/login")
-                .permitAll()
-            )
+                .exceptionHandling(exceptionHandling -> exceptionHandling
+                        .accessDeniedHandler(accessDeniedHandler()))
 
-            .exceptionHandling(exceptionHandling -> exceptionHandling
-                .accessDeniedHandler(accessDeniedHandler())
-            )
-
-
-            .csrf(csrf -> csrf.disable());
+                .csrf(csrf -> csrf.disable());
 
         return http.build();
     }
@@ -54,7 +51,7 @@ public class WebSecurity {
         return new AccessDeniedHandler() {
             @Override
             public void handle(HttpServletRequest request, HttpServletResponse response,
-                               AccessDeniedException accessDeniedException) throws IOException, ServletException {
+                    AccessDeniedException accessDeniedException) throws IOException, ServletException {
                 response.sendRedirect("/");
             }
         };
