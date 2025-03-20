@@ -47,14 +47,14 @@ public class FactoryController {
     }
 
     @PostMapping("/register-factory")
-    public String registro(@RequestParam String name, ModelMap modelo) {
+    public String registro(@RequestParam String name, ModelMap model) {
         try {
             factoryService.createFactory(name);
-            modelo.put("succes", "Factory successfully registered");
+            model.put("succes", "Factory successfully registered");
             return "redirect:/inicio";
 
         } catch (InvalidArgumentException ex) {
-            modelo.put("error", ex.getMessage());
+            model.put("error", ex.getMessage());
             return "factoryForm.html";
         }
     }

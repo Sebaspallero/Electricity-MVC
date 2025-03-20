@@ -12,9 +12,9 @@
             <h1>La Casa de Electricidad - <span th:if="${user != null}" th:text="${user.role}"></span></h1>
             <p th:if="${user != null}" th:text=" 'Hola de vuelta '+ ${user.name}"></p>
             <div class="nav-buttons">
-                <a href="listarfabricas.html" class="btn">Listar fábricas</a>
-                <a href="listararticulos.html" class="btn">Listar artículos</a>
-                <a href="login.html" class="btn logout">Cerrar sesión</a>
+                <a href="/factory/list" class="btn">Listar fábricas</a>
+                <a href="/product/list" class="btn">Listar artículos</a>
+                <a href="/logout" class="btn logout">Cerrar sesión</a>
             </div>
         </nav>
     </header>

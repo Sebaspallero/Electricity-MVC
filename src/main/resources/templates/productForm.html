@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form class="form" th:action="@{/product/register-product}" method="POST">
+        <h2>Load Product</h2>
+        <div class="form-group my-3">
+            <input type="text" class="form-control" name="name" placeholder="Product Name">
+        </div>
+        <div class="form-group my-3">
+            <input type="text" class="form-control" name="productDescription" placeholder="Product Description">
+        </div>
+        <div  class="form-group my-3">
+            <select name="factoryId">
+                <option value="">Select Factory</option>
+                <option th:each="factory : ${factories}" th:value="${factory.id}" th:text="${factory.name}"> 
+                </option>
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Guardar</button>
+    </form>
+</body>
+</html>

@@ -24,54 +24,31 @@
         <div class="alert alert-success" id="exito" style="display: none;">¡Operación exitosa!</div>
         <div class="alert alert-danger" id="error" style="display: none;">¡Hubo un error!</div>
 
-        <a href="#" class="btn">Nueva Fábrica</a>
+        <a href="/factory/register-factory" class="btn">Nueva Fábrica</a>
 
         <!-- Tabla para mostrar las fábricas -->
-        <table class="table">
+        <table class="table table-dark">
             <thead>
                 <tr>
-                    <th>ID</th>
-                    <th>Nombre</th>
-                    <th>Acciones</th>
+                    <th scope="col">Factory ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Update</th>
+                    <th scope="col">Delete</th>
                 </tr>
             </thead>
-            <tbody>
-                <!-- Fila de ejemplo, simula que hay fábricas cargadas -->
+            <tbody th:each="factory : ${factories}"> 
                 <tr>
-                    <td>1</td>
-                    <td>Fábrica ABC</td>
+                    <th scope="row" th:text="${factory.id}"></th>
+                    <td th:text="${factory.name}"></td>
                     <td>
-                        <!-- Icono de modificar -->
-                        <a href="#" class="btn btn-edit">
-                            <i class="fas fa-edit"></i> Modificar
-                        </a>
-                        <!-- Formulario para eliminar -->
-                        <form action="#" method="POST" style="display: inline;">
-                            <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro?')">
-                                <i class="fas fa-trash-alt"></i> Eliminar
-                            </button>
-                        </form>
+                        <a th:action="@{/}"> <i class="fas fa-edit"></i></a>
                     </td>
-                </tr>
-
-                <!-- Otra fila de ejemplo -->
-                <tr>
-                    <td>2</td>
-                    <td>Fábrica XYZ</td>
                     <td>
-                        <!-- Icono de modificar -->
-                        <a href="#" class="btn btn-edit">
-                            <i class="fas fa-edit"></i> Modificar
-                        </a>
-                        <!-- Formulario para eliminar -->
-                        <form action="#" method="POST" style="display: inline;">
-                            <button type="submit" class="btn btn-delete" onclick="return confirm('¿Estás seguro?')">
-                                <i class="fas fa-trash-alt"></i> Eliminar
-                            </button>
-                        </form>
+                        <a th:action="@{/}"> <i class="fas fa-trash"></i></a>
                     </td>
                 </tr>
             </tbody>
         </table>
     </section>
-</main
+</main>
+</body>

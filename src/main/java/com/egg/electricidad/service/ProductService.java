@@ -19,14 +19,18 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private FactoryService factoryService;
+
     @Transactional
-    public void createProduct(String name, String description, Factory factoryId){
+    public void createProduct(String name, String description, String factoryId){
 
         Product product = new Product();
+        Factory factory = factoryService.findById(factoryId);
 
         product.setName(name);
         product.setProductDescription(description);
-        product.setFactory(factoryId);
+        product.setFactory(factory);
 
         productRepository.save(product);
     }
