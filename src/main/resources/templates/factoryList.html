@@ -5,50 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Fábricas</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"> <!-- Para los iconos -->
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/factoryList.css">
 </head>
 <body>
-
-<!-- Navbar -->
-<header>
-    <nav>
-        <h1>La Casa de Electricidad</h1>
-    </nav>
-</header>
-
-<main>
-    <section class="form-container">
-        <h2>Gestión de Fábricas</h2>
-
-        <!-- Mensajes de éxito o error (puedes usarlo más adelante con backend si es necesario) -->
-        <div class="alert alert-success" id="exito" style="display: none;">¡Operación exitosa!</div>
-        <div class="alert alert-danger" id="error" style="display: none;">¡Hubo un error!</div>
-
-        <a href="/factory/register-factory" class="btn">Nueva Fábrica</a>
-
-        <!-- Tabla para mostrar las fábricas -->
-        <table class="table table-dark">
-            <thead>
-                <tr>
-                    <th scope="col">Factory ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">Update</th>
-                    <th scope="col">Delete</th>
-                </tr>
-            </thead>
-            <tbody th:each="factory : ${factories}"> 
-                <tr>
-                    <th scope="row" th:text="${factory.id}"></th>
-                    <td th:text="${factory.name}"></td>
-                    <td>
-                        <a th:action="@{/}"> <i class="fas fa-edit"></i></a>
-                    </td>
-                    <td>
-                        <a th:action="@{/}"> <i class="fas fa-trash"></i></a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
-</main>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <main>
+        <section class="form-container">
+            <h2>Gestión de Fábricas</h2>
+            <div class="alert alert-success" id="exito" style="display: none;">¡Operación exitosa!</div>
+            <div class="alert alert-danger" id="error" style="display: none;">¡Hubo un error!</div>
+            <a th:href="@{/factory/register-factory}" class="btn btn-primary">Nueva Fábrica</a>
+            <div class="factories-container">
+                <div class="factory-card" th:each="factory : ${factories}">
+                    <div class="card-header">
+                        <h3 th:text="${factory.name}"></h3>
+                    </div>
+                    <div class="card-body">
+                        <p><strong>Fábrica ID:</strong> <span th:text="${factory.id}"></span></p>
+                        <div class="card-actions">
+                            <a href="#" class="btn btn-outline">Editar</a>
+                            <a href="#" class="btn btn-outline">Eliminar</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>    
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>

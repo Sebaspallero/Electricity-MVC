@@ -4,46 +4,109 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/index.css">
-    <title>Voltia</title>
+    <link rel="stylesheet" href="/css/header.css">
+    <title>ElectroHogar</title>
 </head>
 <body>
-    <header>
-        <nav>
-            <div class="logo-container">
-                <i class="fas fa-bolt"></i>
-            </div>
-            <h1>Voltia</h1>
-        </nav>
-    </header>
-
+    <header th:replace="~{fragments/header :: header}"></header>
     <main>
         <section class="hero">
-            <h2>Bienvenido a Voltia</h2>
-            <p>Tu tienda confiable de productos eléctricos.</p>
-            <div class="buttons">
-                <a href="/auth/register" class="btn">Registrarse</a>
-                <a href="/auth/login" class="btn">Iniciar sesión</a>
+            <div class="hero-content">
+                <h2>Bienvenido a <span>Electro</span>Hogar</h2>
+                <p>Tu tienda confiable para todos tus proyectos eléctricos.</p>
+                <div class="hero-buttons">
+                    <a href="/productos" class="btn btn-primary">Ver Productos</a>
+                    <a href="/contacto" class="btn btn-outline">Contáctanos</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="../img/electrico.jpg" alt="Productos eléctricos de alta calidad">
             </div>
         </section>
-
-        <section class="about">
-            <h2>¿Quiénes Somos?</h2>
-            <p>Somos especialistas en productos eléctricos con años de experiencia en el mercado.</p>
+        
+        <section class="destacados">
+            <h2 class="section-title">Productos <span>Destacados</span></h2>
+            <div class="featured-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64">
+                            <path d="M8 2a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8zm0 2h8v16H8V4z" fill="#e74c3c"/>
+                            <path d="M12 5v14" stroke="#e74c3c" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Cables y Conectores</h3>
+                    <p>Amplia variedad para todas tus instalaciones.</p>
+                    <a href="#" class="btn-link">Ver más</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64">
+                            <path d="M12 3a1 1 0 0 1 1 1v8a1 1 0 0 1-2 0V4a1 1 0 0 1 1-1z" fill="#e74c3c"/>
+                            <circle cx="12" cy="17" r="5" fill="none" stroke="#e74c3c" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Iluminación LED</h3>
+                    <p>Soluciones eficientes y económicas.</p>
+                    <a href="#" class="btn-link">Ver más</a>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="64" height="64">
+                            <rect x="4" y="4" width="16" height="16" rx="2" fill="none" stroke="#e74c3c" stroke-width="2"/>
+                            <path d="M8 8h8M8 12h8M8 16h8" stroke="#e74c3c" stroke-width="2"/>
+                        </svg>
+                    </div>
+                    <h3>Tableros y Disyuntores</h3>
+                    <p>Protección y seguridad para tu hogar.</p>
+                    <a href="#" class="btn-link">Ver más</a>
+                </div>
+            </div>
         </section>
-
-        <section class="products">
-            <h2>Nuestros Productos</h2>
-            <div class="product-list">
-                <div class="product-item">Cables y Conectores</div>
-                <div class="product-item">Iluminación LED</div>
-                <div class="product-item">Tableros y Disyuntores</div>
+        
+        <section class="about">
+            <div class="about-content">
+                <h2 class="section-title">¿Quiénes <span>Somos</span>?</h2>
+                <p>En <strong>ElectroHogar</strong>, contamos con más de 15 años de experiencia proveyendo soluciones eléctricas de calidad para hogares y empresas.</p>
+                <p>Nuestro equipo de especialistas está siempre disponible para asesorarte en tus proyectos eléctricos, garantizando productos certificados y seguros.</p>
+                <a href="/nosotros" class="btn btn-outline">Conoce más</a>
+            </div>
+            <div class="about-image">
+                <img src="../img/about.jpg" alt="Nuestro equipo de especialistas">
+            </div>
+        </section>
+        
+        <section class="categorias">
+            <h2 class="section-title">Nuestras <span>Categorías</span></h2>
+            <div class="category-grid">
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../img/electric-cables.jpg" alt="Cables y Conectores">
+                    </div>
+                    <h3>Cables y Conectores</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../img/led.jpg" alt="Iluminación LED">
+                    </div>
+                    <h3>Iluminación LED</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../img/tableros.jpg" alt="Tableros y Disyuntores">
+                    </div>
+                    <h3>Tableros y Disyuntores</h3>
+                </div>
+                <div class="category-card">
+                    <div class="category-image">
+                        <img src="../img/tools.jpg" alt="Herramientas">
+                    </div>
+                    <h3>Herramientas</h3>
+                </div>
             </div>
         </section>
     </main>
-    <footer>
-        <p>&copy; 2025 Voltia - Sebastian Pallero. Todos los derechos reservados.</p>
-    </footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

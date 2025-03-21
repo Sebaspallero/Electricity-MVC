@@ -4,30 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Inicio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/header.css">
     <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/inicio.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <h1>La Casa de Electricidad - <span th:if="${user != null}" th:text="${user.role}"></span></h1>
-            <p th:if="${user != null}" th:text=" 'Hola de vuelta '+ ${user.name}"></p>
-            <div class="nav-buttons">
-                <a href="/factory/list" class="btn">Listar fábricas</a>
-                <a href="/product/list" class="btn">Listar artículos</a>
-                <a href="/logout" class="btn logout">Cerrar sesión</a>
-            </div>
-        </nav>
-    </header>
-
+    <header th:replace="~{fragments/header :: header}"></header>
     <main>
-        <section class="welcome">
-            <h2>Bienvenido a tu panel</h2>
-            <p>Accede a las opciones para gestionar fábricas y artículos.</p>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Bienvenido a tu <span>panel</span></h2>
+                <p>Gestiona de manera eficiente tus fábricas y artículos con nuestras herramientas avanzadas.</p>
+                <div class="hero-buttons">
+                    <a href="/factory/list" class="btn btn-primary">Listar fábricas</a>
+                    <a href="/product/list" class="btn btn-outline">Listar artículos</a>
+                    <a href="/logout" class="btn btn-link">Cerrar sesión</a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="../img/electrico.jpg" alt="Panel de administración">
+            </div>
         </section>
     </main>
-
-    <footer>
-        <p>&copy; 2025 La Casa de Electricidad. Todos los derechos reservados.</p>
-    </footer>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>

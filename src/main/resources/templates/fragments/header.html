@@ -1,0 +1,14 @@
+<header th:fragment="head">
+    <div class="logo-container">
+        <img class="logo" src="../img/logo.svg" alt="Logo">
+        <h1 class="company-name">Electro<span>Hogar</span></h1>
+    </div>
+    <div class="auth-buttons" th:if="${user == null}">
+        <a th:href="@{/auth/login}" class="btn btn-login">Iniciar Sesión</a>
+        <a th:href="@{/auth/register}" class="btn btn-register">Registrarse</a>
+    </div>
+    <div th:if="${user != null}" class="logout-buttons">
+        <p th:text="'Hola de vuelta '+ ${user.name}"></p>
+        <a class="btn btn-login" th:href="@{/logout}">Cerrar Sesión</a> 
+    </div>
+</header>

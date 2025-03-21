@@ -22,7 +22,7 @@ public class Product {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String id;
 
-    @Column(name = "product_code", unique = true, nullable = false)
+    @Column(name = "product_code", nullable = false)
     private Integer productCode;
 
     @Column(name = "name", nullable = false)

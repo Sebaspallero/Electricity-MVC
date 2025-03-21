@@ -3,25 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Registrar Producto</title>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/header.css">
+    <link rel="stylesheet" href="/css/registerProduct.css">
 </head>
 <body>
-    <form class="form" th:action="@{/product/register-product}" method="POST">
-        <h2>Load Product</h2>
-        <div class="form-group my-3">
-            <input type="text" class="form-control" name="name" placeholder="Product Name">
-        </div>
-        <div class="form-group my-3">
-            <input type="text" class="form-control" name="productDescription" placeholder="Product Description">
-        </div>
-        <div  class="form-group my-3">
-            <select name="factoryId">
-                <option value="">Select Factory</option>
-                <option th:each="factory : ${factories}" th:value="${factory.id}" th:text="${factory.name}"> 
-                </option>
-            </select>
-        </div>
-        <button type="submit" class="btn btn-primary mt-3">Guardar</button>
-    </form>
+    <header th:replace="~{fragments/header :: header}"></header>
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h2>Registrá Tu <span>Producto</span></h2>
+                <p>Complete los detalles a continuación para agregar un nuevo producto al sistema.</p>
+                <form class="form" th:action="@{/product/register-product}" method="POST">
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="name" placeholder="Nombre del Producto" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" class="form-control" name="productDescription" placeholder="Descripción del Producto" required>
+                    </div>
+                    <div class="form-group">
+                        <select class="form-control" name="factoryId" required>
+                            <option value="">Seleccione una Fábrica</option>
+                            <option th:each="factory : ${factories}" th:value="${factory.id}" th:text="${factory.name}"></option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </form>
+            </div>
+            <div class="product-image">
+                <img src="../img/tools.jpg" alt="Product">
+            </div>
+        </section>
+    </main>
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
 </html>
