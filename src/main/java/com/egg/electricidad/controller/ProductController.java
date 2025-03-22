@@ -35,15 +35,28 @@ public class ProductController {
     }
 
     @GetMapping("update/{id}")
-    public String getById(@PathVariable String id, ModelMap model) {
+    public String update(@PathVariable String id, ModelMap model) {
         try {
             Product product = productService.findById(id);
+            List<Factory> factories = factoryService.findAll();
             model.addAttribute("product", product);
-            return "product.html";
+            model.addAttribute("factories", factories);
+            return "productUpdate.html";
 
         } catch (Exception e) {
             model.put("error", e.getMessage());
             return "redirect:/product/list";
+        }
+    }
+
+    @PostMapping("/update/{id}")
+    public String update(@RequestParam String productId, @RequestParam String name, @RequestParam String productDescription, @RequestParam String factoryId, ModelMap model)  {
+        try {
+            productService.updateProduct(name, productDescription, productId, factoryId);
+            return "redirect:/product/list";
+        } catch (InvalidArgumentException ex) {
+            model.put("error", ex.getMessage());
+            return "productUpdate.html";
         }
     }
 

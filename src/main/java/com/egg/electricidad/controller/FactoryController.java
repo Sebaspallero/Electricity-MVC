@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,16 +29,26 @@ public class FactoryController {
         return "factoryList.html";
     }
 
-    @GetMapping("factory/{id}")
-    public String getById(@RequestParam String id, ModelMap model) {
+    @GetMapping("update/{id}")
+    public String update(@PathVariable String id, ModelMap model) {
         try {
             Factory factory = factoryService.findById(id);
             model.addAttribute("factory", factory);
-            return "factory.html";
-
+            return "factoryUpdate.html";
         } catch (Exception e) {
             model.put("error", e.getMessage());
             return "redirect:/factory/list";
+        }
+    }
+
+    @PostMapping("update/{id}")
+    public String update(@RequestParam String factoryId, @RequestParam String name, ModelMap model) {
+        try {
+            factoryService.updateFactory(factoryId, name);
+            return "redirect:/factory/list";
+        } catch (Exception e) {
+            model.put("error", e.getMessage());
+            return "factoryUpdate.html";
         }
     }
 
@@ -58,4 +69,18 @@ public class FactoryController {
             return "factoryForm.html";
         }
     }
+
+    @PostMapping("delete/{id}")
+    public String delete(@PathVariable String id, ModelMap model) {
+        try {
+            factoryService.deleteFactory(id);
+            model.put("succes", "Factory successfully deleted");
+            return "redirect:/factory/list";
+        } catch (Exception e) {
+            model.put("error", e.getMessage());
+            return "redirect:/factory/list";
+        }
+    }
+
+
 }

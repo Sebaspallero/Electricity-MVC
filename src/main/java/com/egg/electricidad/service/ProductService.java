@@ -55,19 +55,16 @@ public class ProductService {
     }
 
     @Transactional
-    public void updateProduct(String name, String description, String id){
+    public void updateProduct(String name, String description, String productId, String factoryId) {
           
-        Optional<Product> response = productRepository.findById(id);
+        Factory factory = factoryService.findById(factoryId);        
+        Product product = findById(productId);
 
-        if (response.isPresent()) {
-            Product product = response.get();
-           
-            product.setName(name);
-            product.setProductDescription(description);
-            productRepository.save(product);
-        }else{
-            throw new InvalidArgumentException("Product not found with id: " + id);
-        }
+        product.setName(name);
+        product.setProductDescription(description);
+        product.setFactory(factory);
+
+        productRepository.save(product);
     }
 
     @Transactional

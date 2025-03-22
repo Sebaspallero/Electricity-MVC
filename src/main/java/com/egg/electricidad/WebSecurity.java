@@ -23,14 +23,14 @@ public class WebSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/css/**", "/js/**", "/img/**", "/").permitAll()
+                        .requestMatchers("/css/**", "/js/**", "/img/**", "/", "/redirect-home").permitAll()
                         .requestMatchers("/auth/**").permitAll()
                         .requestMatchers("/inicio").hasAnyRole("USER", "ADMIN")
                         .requestMatchers("/product/list", "/factory/list").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/product/register-product", "/factory/register-factory").hasRole("ADMIN")
+                        .requestMatchers("/product/register-product", "/factory/register-factory",
+                                         "/factory/update/**", "/product/update/**", "/product/delete/**", "/factory/delete/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
                         )
-                        
                 .formLogin((form) -> form
                         .loginPage("/auth/login")
                         .loginProcessingUrl("/logincheck")
@@ -58,7 +58,7 @@ public class WebSecurity {
             @Override
             public void handle(HttpServletRequest request, HttpServletResponse response,
                     AccessDeniedException accessDeniedException) throws IOException, ServletException {
-                response.sendRedirect("/");
+                response.sendRedirect("/redirect-home");
             }
         };
     }

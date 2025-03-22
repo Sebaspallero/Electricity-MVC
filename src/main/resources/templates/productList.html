@@ -17,7 +17,7 @@
             <h2>Gestión de Artículos</h2>
             <div class="alert alert-success" id="exito" style="display: none;">¡Operación exitosa!</div>
             <div class="alert alert-danger" id="error" style="display: none;">¡Hubo un error!</div>
-            <a th:href="@{/product/register-product}" class="btn btn-primary">Nuevo Artículo</a>
+            <a th:if="${user != null and user.role == T(com.egg.electricidad.util.Role).ADMIN}" th:href="@{/product/register-product}" class="btn btn-primary">Nuevo Artículo</a>
             <div class="products-container">
                 <div class="product-card" th:each="product : ${products}">
                     <div class="card-header">
@@ -27,8 +27,8 @@
                         <p><strong>Código de Producto:</strong> <span th:text="${product.productCode}"></span></p>
                         <p><strong>Descripción:</strong> <span th:text="${product.productDescription}"></span></p>
                         <p><strong>Fábrica:</strong> <span th:text="${product.factory.name}"></span></p>
-                        <div class="card-actions">
-                            <a href="#" th:href="@{/product/update/{id}(id=${product.id})}" class="btn btn-outline">Editar</a>
+                        <div th:if="${user != null and user.role == T(com.egg.electricidad.util.Role).ADMIN}" class="card-actions">
+                            <a th:href="@{/product/update/{id}(id=${product.id})}" class="btn btn-outline">Editar</a>
                             <form th:action="@{/product/delete/{id}(id=${product.id})}" method="POST" class="inline-form">
                                 <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar este artículo?')" class="btn btn-outline">Eliminar</button>
                             </form>

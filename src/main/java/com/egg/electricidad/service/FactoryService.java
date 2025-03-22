@@ -47,9 +47,9 @@ public class FactoryService {
     }
 
     @Transactional
-    public void updateFactory(String name, String id) {
+    public void updateFactory(String factoryId, String name) {
 
-        Optional<Factory> response = factoryRepository.findById(id);
+        Optional<Factory> response = factoryRepository.findById(factoryId);
 
         if (response.isPresent()) {
             Factory factory = response.get();
@@ -58,7 +58,7 @@ public class FactoryService {
             factoryRepository.save(factory);
 
         } else {
-            throw new InvalidArgumentException("Factory not found with id: " + id);
+            throw new InvalidArgumentException("Factory not found with id: " + factoryId);
         }
     }
 

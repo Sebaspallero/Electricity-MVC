@@ -17,7 +17,7 @@
             <h2>Gestión de Fábricas</h2>
             <div class="alert alert-success" id="exito" style="display: none;">¡Operación exitosa!</div>
             <div class="alert alert-danger" id="error" style="display: none;">¡Hubo un error!</div>
-            <a th:href="@{/factory/register-factory}" class="btn btn-primary">Nueva Fábrica</a>
+            <a th:if="${user != null and user.role == T(com.egg.electricidad.util.Role).ADMIN}" th:href="@{/factory/register-factory}" class="btn btn-primary">Nueva Fábrica</a>
             <div class="factories-container">
                 <div class="factory-card" th:each="factory : ${factories}">
                     <div class="card-header">
@@ -25,9 +25,11 @@
                     </div>
                     <div class="card-body">
                         <p><strong>Fábrica ID:</strong> <span th:text="${factory.id}"></span></p>
-                        <div class="card-actions">
-                            <a href="#" class="btn btn-outline">Editar</a>
-                            <a href="#" class="btn btn-outline">Eliminar</a>
+                        <div th:if="${user != null and user.role == T(com.egg.electricidad.util.Role).ADMIN}" class="card-actions">
+                            <a th:href="@{/factory/update/{id}(id=${factory.id})}" class="btn btn-outline">Editar</a>
+                            <form th:action="@{/factory/delete/{id}(id=${factory.id})}" method="POST" class="inline-form">
+                                <button type="submit" onclick="return confirm('¿Estás seguro de que deseas eliminar esta Fabrica?')" class="btn btn-outline">Eliminar</button>
+                            </form>
                         </div>
                     </div>
                 </div>
